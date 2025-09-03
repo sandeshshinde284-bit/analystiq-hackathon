@@ -238,3 +238,7 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 ---
 ### Screen 4: Deal Memo Dashboard
 ![Deal Memo Dashboard Mockup](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/The%20Deal%20Memo%20Dashboard.png)
+
+---
+### Screen 5: Process Flow Diagram
+![Process Flow Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/FlowChart-AnalystIQ.gif)
