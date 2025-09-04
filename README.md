@@ -238,7 +238,7 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 
 ### Screen 3: Uploaded Pitch
 
-![Uploaded Pitch Mockup](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/File-Uploaded.png)
+![Uploaded Pitch Mockup](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/File-Uploaded.jpeg)
 
 ---
 
