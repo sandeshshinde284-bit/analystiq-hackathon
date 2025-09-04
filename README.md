@@ -220,23 +220,34 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 
 ## 12. Screen Designs & Wireframes
 
-### Screen 1: New Analysis Hub
+### Screen 1: Landing-Page
+
+![Landing Page Hero Section](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Landing-Page-1.png)
+
+---
+
+### Screen 2: Landing-Page-Features
+![Landing Page Features Section](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Landing-Page-2.png)
+
+---
+
+### Screen 2: New Analysis Hub
 ![New Analysis Hub Mockup](https://github.com/sandeshshinde284-bit/analystiq-hackathon/blob/main/images/New%20Analysis%20Hub.png?raw=true)
 
 ---
 
-### Screen 2: Uploaded Pitch
+### Screen 3: Uploaded Pitch
 
 ![Uploaded Pitch Mockup](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/File-Uploaded.png)
 
 ---
 
-### Screen 3: AI Thinking
+### Screen 4: AI Thinking
 
 ![AI Thinking Mockup](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Thinking_Generating_AI.png)
 
 ---
-### Screen 4: Deal Memo Dashboard
+### Screen 5: Deal Memo Dashboard
 ![Deal Memo Dashboard Mockup](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/The%20Deal%20Memo%20Dashboard.png)
 
 ---
