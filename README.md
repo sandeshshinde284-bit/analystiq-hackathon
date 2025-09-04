@@ -240,8 +240,37 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 ![Deal Memo Dashboard Mockup](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/The%20Deal%20Memo%20Dashboard.png)
 
 ---
-### Screen 5: Process Flow Diagram
-![Process Flow Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/FlowChart-AnalystIQ.gif)
+## 12. Process Flow Diagram and Architectural Diagram
 
+#### Diagram Description: Process Flow
+
+![Process Flow Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/FlowChart-AnalystIQ.gif)
+This diagram illustrates the end-to-end user journey within the AnalystIQ platform. It outlines the step-by-step process a user follows, from initial data input to interacting with the final analysis. The flow is broken down into three logical phases:
+
+*   **Phase 1: Data Input:** This phase covers the initial actions of the user, including selecting a startup category, uploading the primary document (pitch deck), and providing optional context (transcript). It concludes when the user initiates the analysis.
+
+*   **Phase 2: AI Analysis:** This is an intermediate step that communicates to the user that the system's AI is actively processing their data. It simulates complex backend operations to build user trust and manage expectations.
+
+*   **Phase 3: Insights & Interaction:** This is the core value phase where the final "Deal Memo" dashboard is presented to the user. It also includes an interactive loop, showing how a user can customize the analysis weights to receive a tailored recommendation in real-time, demonstrating the platform's dynamic capabilities.
+
+#### Diagram Description: System Architecture
 
 ![Architecture Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Architecture-diagram.gif)
+
+This diagram details the technical architecture of the AnalystIQ platform, built entirely on Google Cloud Platform to ensure scalability, security, and intelligence. It shows the flow of data through our serverless, event-driven system.
+
+*   **The Journey Begins:** The process starts when the user uploads a pitch deck from their **Browser** directly to **Cloud Storage**. This is a secure and robust method for handling file uploads.
+
+*   **The Orchestrator:** The file upload triggers our central controller, a **Cloud Function**. This function orchestrates the entire analysis workflow by calling other services.
+
+*   **Data Extraction & Analysis:**
+    1.  The Cloud Function first sends the file to the **Cloud Vision API** to extract text from the PDF.
+    2.  The extracted text is then sent to the **Vertex AI (Gemini)** model.
+    3.  As part of its analysis, Gemini is prompted to query our **BigQuery** database to fetch benchmarking data on peer startups.
+
+*   **Storing & Displaying Results:**
+    1.  Once Gemini completes its analysis, it returns a structured JSON report to the Cloud Function.
+    2.  The Function saves this final report into our **Firestore** database.
+    3.  Finally, the User's **Browser** reads the report directly from Firestore in real-time to display the interactive dashboard.
+
+This serverless architecture ensures that our platform is cost-effective, highly scalable, and can handle complex AI workloads efficiently.
