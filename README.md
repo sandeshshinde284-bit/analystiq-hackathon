@@ -245,6 +245,7 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 #### Diagram Description: Process Flow
 
 ![Process Flow Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/FlowChart-AnalystIQ.gif)
+
 This diagram illustrates the end-to-end user journey within the AnalystIQ platform. It outlines the step-by-step process a user follows, from initial data input to interacting with the final analysis. The flow is broken down into three logical phases:
 
 *   **Phase 1: Data Input:** This phase covers the initial actions of the user, including selecting a startup category, uploading the primary document (pitch deck), and providing optional context (transcript). It concludes when the user initiates the analysis.
