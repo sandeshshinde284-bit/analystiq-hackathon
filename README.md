@@ -232,7 +232,7 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 ---
 
 ### Screen 2: New Analysis Hub
-![New Analysis Hub Mockup](https://github.com/sandeshshinde284-bit/analystiq-hackathon/blob/main/images/New%20Analysis%20Hub.png?raw=true)
+![New Analysis Hub Mockup](https://github.com/sandeshshinde284-bit/analystiq-hackathon/blob/main/images/New%20Analysis%20Hub.jpeg?raw=true)
 
 ---
 
