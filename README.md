@@ -242,3 +242,6 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 ---
 ### Screen 5: Process Flow Diagram
 ![Process Flow Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/FlowChart-AnalystIQ.gif)
+
+
+![Architecture Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Architecture-diagram.gif)
