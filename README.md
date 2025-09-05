@@ -272,15 +272,24 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 
 #### Diagram Description: Process Flow
 
-![Process Flow Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/FlowChart-AnalystIQ.gif)
+![Process Flow Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Flow-diagram.png)
 
-This diagram illustrates the end-to-end user journey within the AnalystIQ platform. It outlines the step-by-step process a user follows, from initial data input to interacting with the final analysis. The flow is broken down into three logical phases:
+This diagram illustrates the end-to-end user journey within the AnalystIQ platform. It outlines the step-by-step process a user follows, from initial data input to interacting with the final, dynamic analysis dashboard. The flow is broken down into three logical phases:
 
-*   **Phase 1: Data Input:** This phase covers the initial actions of the user, including selecting a startup category, uploading the primary document (pitch deck), and providing optional context (transcript). It concludes when the user initiates the analysis.
+Phase 1: Data Input
+This phase covers the initial actions of the user, including landing on the "New Analysis Hub," uploading the primary document (pitch deck), and providing optional context (transcript). It concludes when the user initiates the analysis by clicking the "Analyze Startup" button.
 
-*   **Phase 2: AI Analysis:** This is an intermediate step that communicates to the user that the system's AI is actively processing their data. It simulates complex backend operations to build user trust and manage expectations.
+Phase 2: AI Analysis
+This is an intermediate step that communicates to the user that the system's AI is actively processing their data on the "Analysis in Progress" screen. It simulates complex backend operations to build user trust and manage expectations while the analysis is being performed.
 
-*   **Phase 3: Insights & Interaction:** This is the core value phase where the final "Deal Memo" dashboard is presented to the user. It also includes an interactive loop, showing how a user can customize the analysis weights to receive a tailored recommendation in real-time, demonstrating the platform's dynamic capabilities.
+Phase 3: Insights & Interaction
+This is the core value phase where the final "Deal Memo" dashboard is presented to the user. A key strength of our platform is that this phase is not static; it includes two powerful interactive loops that allow the user to engage with the data:
+
+The "Source of Truth" Verification Loop: The user can choose to verify a data point. This path allows them to click a "Source" icon on the dashboard, which opens a modal window showing the highlighted snippet from the original document. This loop builds ultimate trust and transparency.
+
+The "Analysis Customization" Loop: The user can also choose to customize the analysis. This path allows them to click a "Settings" icon, adjust the weights of different factors (e.g., Team, Market), and see the overall recommendation update in real-time. This loop empowers the user to tailor the AI's output to their specific investment thesis.
+
+After interacting, the user can either continue exploring the dashboard or end the session. This multi-loop design showcases a dynamic and user-centric application, not just a static report.
 
 #### Diagram Description: System Architecture
 
