@@ -270,7 +270,7 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 ---
 ## 12. Process Flow Diagram and Architectural Diagram
 
-#### Diagram Description: Process Flow
+#### Diagram Description: Process Flow.
 
 ![Process Flow Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Flow-diagram.png)
 
