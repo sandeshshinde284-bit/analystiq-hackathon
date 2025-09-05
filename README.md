@@ -25,6 +25,7 @@
     *   Sector Benchmarking (Comparison charts).
     *   A final Investment Recommendation.
 3.  **Customizable Analysis Weights:** Allow users to adjust the importance of factors like 'Team', 'Market', and 'Traction' to tailor the recommendation.
+4.  **Verifiable Insights with 'Source of Truth':** Build investor trust by allowing users to instantly trace any AI-generated data point back to its original source document.
 
 ## 4.1. Detailed Functionality Breakdown
 
@@ -68,12 +69,24 @@
         *   Product / Technology
         *   Market Size
         *   Traction / Financials
+
+ ### Functionality 4: Verifiable Insights with "Source of Truth"
+
+*   **Goal:** To build ultimate trust and transparency by allowing the user to instantly verify any key metric or claim against the original source document. This feature directly answers the investor's question: "How do I know the AI is right?"
+
+*   **UI Components:**
+
+1.  **Source Icon:** A small, non-intrusive icon (e.g., a document 📄 or link icon 🔗) placed next to key data points on the Deal Memo Dashboard (e.g., next to "Runway: 18 Months").
+2.   **Source Modal:** A pop-up window that appears when the user clicks the Source Icon.
+3.   **Highlighted Snippet:** Inside the modal, an image of the relevant section of the source document (e.g., a pitch deck slide) will be displayed. A clear visual highlight (e.g., a yellow transparent box) will be overlaid on the exact text or chart from which the data was extracted.
+   
 *   **User Experience (UX) Flow:**
     1.  On the dashboard, the user clicks the "Settings" icon.
     2.  The modal opens.
     3.  The user adjusts the sliders. For example, they might move "Team" to 80% and "Market Size" to 20%.
     4.  As the user adjusts the sliders, the "Overall Recommendation" and "Confidence Score" on the main dashboard (visible behind the modal) **update in real-time**. This provides immediate feedback and is a powerful "wow" factor for a prototype.
     5.  User closes the modal.
+
 ## 5. Proposed Tech Stack (For Final Submission)
 
 *   **Google Gemini / Vertex AI:** For core analysis, summarization, and risk flagging.
@@ -81,6 +94,7 @@
 *   **Google BigQuery:** To store and query benchmark data for peer comparison.
 *   **Google Firebase (Firestore & Cloud Storage):** To store user data, uploaded files, and generated reports.
 *   **Google Agent Builder / Cloud Functions:** To orchestrate the entire workflow.
+
 ## 6. Assumptions & Out of Scope (for Prototype)
 
 ### Assumptions
@@ -216,6 +230,9 @@ While the initial prototype focuses on the core MVP, the long-term vision for An
 5.  **Historical Analysis & Trend Tracking:**
     *   Save all analyses for a particular startup over time, allowing investors to track its progress, metric improvements, and how its story has evolved from one funding round to the next.
 
+6.   **AI Diligence Co-pilot:** An interactive chat interface allowing investors to ask follow-up questions directly to the AI about the analysis (e.g., "What are the biggest risks you see in their go-to-market strategy?"), turning the static report into a dynamic conversation.
+
+7.   **Sentiment & Story Arc Analysis:** Go beyond numbers by analyzing founder call transcripts to generate a sentiment graph. This visualizes the founder's confidence and conviction throughout their narrative, providing insights into crucial "human signals" that experienced investors look for.
 ---
 
 ## 12. Screen Designs & Wireframes
@@ -267,22 +284,26 @@ This diagram illustrates the end-to-end user journey within the AnalystIQ platfo
 
 #### Diagram Description: System Architecture
 
-![Architecture Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Architecture-diagram.gif)
+![Architecture Diagram](https://raw.githubusercontent.com/sandeshshinde284-bit/analystiq-hackathon/main/images/Architechture-diagram-NEW.png)
 
-This diagram details the technical architecture of the AnalystIQ platform, built entirely on Google Cloud Platform to ensure scalability, security, and intelligence. It shows the flow of data through our serverless, event-driven system.
+This diagram details the technical architecture of the AnalystIQ platform, built entirely on Google Cloud to ensure scalability, security, and intelligence. It shows the flow of data through our serverless, event-driven system from initial upload to final analysis and interaction.
 
-*   **The Journey Begins:** The process starts when the user uploads a pitch deck from their **Browser** directly to **Cloud Storage**. This is a secure and robust method for handling file uploads.
+The numbered steps correspond to the data flow in the diagram:
 
-*   **The Orchestrator:** The file upload triggers our central controller, a **Cloud Function**. This function orchestrates the entire analysis workflow by calling other services.
+1. The Journey Begins (Upload): The process starts when the user uploads a pitch deck (PDF) and optional transcript from their Browser directly to Cloud Storage. This is a secure and robust method for handling file uploads.
 
-*   **Data Extraction & Analysis:**
-    1.  The Cloud Function first sends the file to the **Cloud Vision API** to extract text from the PDF.
-    2.  The extracted text is then sent to the **Vertex AI (Gemini)** model.
-    3.  As part of its analysis, Gemini is prompted to query our **BigQuery** database to fetch benchmarking data on peer startups.
+2. The Orchestrator is Triggered: The file upload to Cloud Storage automatically triggers our central Cloud Function Controller. This function orchestrates the entire analysis workflow by calling other services.
 
-*   **Storing & Displaying Results:**
-    1.  Once Gemini completes its analysis, it returns a structured JSON report to the Cloud Function.
-    2.  The Function saves this final report into our **Firestore** database.
-    3.  Finally, the User's **Browser** reads the report directly from Firestore in real-time to display the interactive dashboard.
+3. Text Extraction: The Cloud Function first sends the file to the Cloud Vision API to extract all text from the document.
+
+4. Core AI Analysis: The extracted text is then passed to the Vertex AI (Gemini) model. Gemini is prompted to perform the core task of analyzing the text to identify key business metrics.
+   
+5. Benchmarking: As part of its analysis, Gemini is prompted to query our BigQuery database to fetch benchmarking data on peer startups, allowing for a data-driven comparison.
+
+6. Saving the Results: Once Gemini completes its analysis, it returns a structured JSON report—including both the insights and the source metadata (e.g., page numbers)—to the Cloud Function. The function then saves this final report into our Firestore database.
+
+7. Displaying the Dashboard: The user's Browser reads the final report directly from Firestore in real-time to display the interactive dashboard.
+
+8. "Source of Truth" Verification: When a user clicks the "source" icon on the dashboard, the Browser uses the metadata from Firestore to fetch the specific source page image directly from Cloud Storage, displaying it in a modal. This completes the transparent verification loop.
 
 This serverless architecture ensures that our platform is cost-effective, highly scalable, and can handle complex AI workloads efficiently.
