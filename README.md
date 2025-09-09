@@ -112,7 +112,7 @@ Storage:     Cloud Storage
 - **Public data integration** (Crunchbase, news APIs)
 - **AI Co-pilot** for interactive Q&A
 - **Team collaboration** features
-
+- **Email integration** for founder updates
 ---
 
 ## 📞 Team & Contact
