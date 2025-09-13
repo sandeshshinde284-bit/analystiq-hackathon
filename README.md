@@ -5,7 +5,7 @@
 ![AnalystIQ Hero](images/hero-banner.png)
 
 ## ✨ Live Demo & Links
-- **🔗 Interactive Prototype:** [Try AnalystIQ](https://www.figma.com/proto/qjva6MqkvNy9EGQR3spvUX/Untitled?node-id=10-31&p=f&t=q4tuL0E6jy6KeetQ-1)
+- **🔗 Interactive Prototype:** [Try AnalystIQ]([https://www.figma.com/proto/qjva6MqkvNy9EGQR3spvUX/Untitled?node-id=10-31&p=f&t=q4tuL0E6jy6KeetQ-1](https://www.figma.com/proto/qjva6MqkvNy9EGQR3spvUX/Untitled?node-id=10-134&p=f&t=Jg5oqMP1lIdJ6gM8-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1))
 - **📹 3-Minute Demo Video:** [Watch Demo](your-video-link-here)
 - **📊 Presentation Slides:** [View Deck](your-presentation-link)
 
@@ -113,13 +113,6 @@ Storage:     Cloud Storage
 - **AI Co-pilot** for interactive Q&A
 - **Team collaboration** features
 - **Email integration** for founder updates
----
-
-## 📞 Team & Contact
-**Built for Google GenAI Exchange Hackathon 2025**
-
-*Revolutionizing venture capital through AI-powered transparency.*
-
 ---
 
 **⭐ Star this repo if AnalystIQ impressed you!**
