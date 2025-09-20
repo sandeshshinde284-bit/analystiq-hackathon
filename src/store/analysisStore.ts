@@ -6,13 +6,13 @@ interface AnalysisData {
   files: {
     pitchDeck: File | null;
     financialModel: File | null;
-    transcript: File | null;
-    founderUpdates: File | null;
+    founderProfiles: File | null;
+    marketResearch: File | null;
+    tractionData: File | null;
   };
   transcriptText: string;
   uploadedFileCount: number;
 }
-
 interface ProcessingStep {
   id: string;
   title: string;
@@ -30,6 +30,12 @@ export const useAnalysisStore = defineStore("analysis", {
     analysisProgress: 0,
     documentsProcessed: [] as string[],
     crossDocumentInsights: [] as any[],
+    evaluationVectors: {
+      founderMarketFit: 25,
+      marketOpportunity: 35,
+      differentiation: 20,
+      teamTraction: 25,
+    } as any,
   }),
 
   getters: {
@@ -48,6 +54,10 @@ export const useAnalysisStore = defineStore("analysis", {
 
     hasMultipleDocuments: (state) => {
       return state.documentsProcessed.length > 1;
+    },
+
+    getOverallInvestmentScore: (state) => {
+      return state.analysisResult?.recommendation?.score || 25;
     },
   },
 
@@ -130,23 +140,31 @@ export const useAnalysisStore = defineStore("analysis", {
       if (analysisData.files.financialModel) {
         steps.push({
           id: "financial-analysis",
-          title: "Processing financial model",
+          title: "Processing financial projections",
           status: "pending",
         });
       }
 
-      if (analysisData.files.transcript) {
+      if (analysisData.files.founderProfiles) {
         steps.push({
-          id: "transcript-analysis",
-          title: "Analyzing call transcript",
+          id: "founder-analysis",
+          title: "Analyzing founder & team profiles",
           status: "pending",
         });
       }
 
-      if (analysisData.files.founderUpdates) {
+      if (analysisData.files.marketResearch) {
         steps.push({
-          id: "updates-analysis",
-          title: "Processing founder updates",
+          id: "market-analysis",
+          title: "Processing market research data",
+          status: "pending",
+        });
+      }
+
+      if (analysisData.files.tractionData) {
+        steps.push({
+          id: "traction-analysis",
+          title: "Analyzing traction & growth metrics",
           status: "pending",
         });
       }
@@ -205,23 +223,31 @@ export const useAnalysisStore = defineStore("analysis", {
         // Generate insights based on multiple documents
         if (analysisData.files.pitchDeck && analysisData.files.financialModel) {
           this.crossDocumentInsights.push({
-            type: "validation",
-            title: "Revenue Consistency Check",
-            status: "verified",
+            type: "financial-validation",
+            title: "Revenue Consistency Verification",
+            status: "validated",
             description:
-              "Revenue figures in pitch deck match financial model projections",
+              "Revenue projections in pitch deck align with detailed financial model",
             confidence: "high",
+            source: {
+              documents: ["Pitch Deck", "Financial Projections"],
+            },
           });
         }
-
-        if (analysisData.files.transcript && analysisData.files.pitchDeck) {
+        if (
+          analysisData.files.founderProfiles &&
+          analysisData.files.pitchDeck
+        ) {
           this.crossDocumentInsights.push({
-            type: "sentiment",
-            title: "Founder Confidence Analysis",
-            status: "positive",
+            type: "team-validation",
+            title: "Founder-Market Fit Assessment",
+            status: "verified",
             description:
-              "Founder shows consistent confidence levels across pitch and call",
-            confidence: "medium",
+              "Founder background demonstrates relevant domain expertise and market understanding",
+            confidence: "high",
+            source: {
+              documents: ["Pitch Deck", "Founder Profiles"],
+            },
           });
         }
 

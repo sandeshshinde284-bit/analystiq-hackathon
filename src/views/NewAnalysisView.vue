@@ -1,16 +1,17 @@
 <template>
   <div class="page-wrapper">
     <div class="container">
-      <h1>Start a New Analysis</h1>
+      <h1>AI Startup Investment Analysis</h1>
       <p class="subtitle">
-        Upload multiple documents for comprehensive startup analysis
+        Upload startup documents for comprehensive investment analysis and due
+        diligence
       </p>
 
       <form @submit.prevent="handleAnalysis">
         <!-- Enhanced Category Dropdown -->
         <div class="form-group">
           <label for="category">
-            Select Startup Category <span class="mandatory">*</span>
+            Startup Sector <span class="mandatory">*</span>
           </label>
           <div class="dropdown-wrapper glassmorphism glow-effect">
             <select
@@ -19,15 +20,19 @@
               class="enhanced-select"
             >
               <option value="" selected disabled>
-                🚀 Choose your startup category
+                🚀 Choose startup sector for evaluation
               </option>
-              <option value="saas">💻 SaaS & Software</option>
+              <option value="saas">💻 SaaS & Enterprise Software</option>
               <option value="fintech">💰 FinTech & Financial Services</option>
-              <option value="healthtech">🏥 HealthTech & Medical</option>
-              <option value="edtech">📚 EdTech & Education</option>
-              <option value="ai">🤖 Artificial Intelligence & ML</option>
-              <option value="ecommerce">🛒 E-Commerce & Retail</option>
-              <option value="cleantech">🌱 CleanTech & Sustainability</option>
+              <option value="healthtech">
+                🏥 HealthTech & Medical Devices
+              </option>
+              <option value="edtech">📚 EdTech & Learning Platforms</option>
+              <option value="ai">🤖 AI/ML & Deep Tech</option>
+              <option value="ecommerce">🛒 E-Commerce & D2C Brands</option>
+              <option value="mobility">🚗 Mobility & Transportation</option>
+              <option value="climate">🌱 Climate Tech & Sustainability</option>
+              <option value="consumer">🛍️ Consumer Apps & Services</option>
               <option value="other">🔧 Other Technology</option>
             </select>
             <i class="dropdown-icon ri-arrow-down-s-line"></i>
@@ -38,14 +43,14 @@
         <div class="form-group">
           <label class="upload-section-title">
             <i class="ri-presentation-line"></i>
-            Primary Pitch Deck <span class="mandatory">*</span>
+            Startup Pitch Deck <span class="mandatory">*</span>
           </label>
           <div class="upload-wrapper">
             <FileUploadZone
               :file="uploadedFiles.pitchDeck"
               :is-uploading="uploadStates.pitchDeck"
               accept=".pdf,.ppt,.pptx"
-              placeholder="Drag and drop your pitch deck here"
+              placeholder="Drag and drop startup pitch deck here"
               @file-selected="(file) => handleFileUpload('pitchDeck', file)"
               @change-file="() => changeFile('pitchDeck')"
               :max-size="15"
@@ -59,35 +64,38 @@
           </div>
         </div>
 
-        <!-- Additional Documents Section -->
+        <!-- Due Diligence Documents Section -->
         <div class="additional-documents">
           <h3 class="section-title">
             <i class="ri-folder-add-line"></i>
-            Supporting Documents
-            <span class="optional">(Optional - but recommended)</span>
+            Due Diligence Documents
+            <span class="optional"
+              >(Optional - but recommended for comprehensive evaluation)</span
+            >
           </h3>
           <p class="section-subtitle">
-            Upload additional documents for deeper analysis and cross-validation
+            Upload supporting documents for founder analysis, market validation,
+            and traction assessment
           </p>
 
           <div class="upload-grid">
-            <!-- Financial Model -->
+            <!-- Financial Projections & Business Model -->
             <div class="upload-item">
               <label class="upload-label">
                 <i class="ri-line-chart-line"></i>
-                Financial Model
+                Financial Projections
               </label>
               <FileUploadZone
                 :file="uploadedFiles.financialModel"
                 :is-uploading="uploadStates.financialModel"
-                accept=".xlsx,.xls,.csv"
-                placeholder="Excel/CSV file"
+                accept=".xlsx,.xls,.csv,.pdf"
+                placeholder="Financial models & projections"
                 @file-selected="
                   (file) => handleFileUpload('financialModel', file)
                 "
                 @change-file="() => changeFile('financialModel')"
                 :max-size="10"
-                file-type="Financial Model"
+                file-type="Financial Projections"
                 compact
               />
               <div
@@ -99,81 +107,108 @@
               </div>
             </div>
 
-            <!-- Call Transcript -->
+            <!-- Founder & Team Profiles -->
             <div class="upload-item">
               <label class="upload-label">
-                <i class="ri-mic-line"></i>
-                Call Transcript
+                <i class="ri-team-line"></i>
+                Founder & Team Profiles
               </label>
               <FileUploadZone
-                :file="uploadedFiles.transcript"
-                :is-uploading="uploadStates.transcript"
-                accept=".txt,.doc,.docx"
-                placeholder="Text/Word file"
-                @file-selected="(file) => handleFileUpload('transcript', file)"
-                @change-file="() => changeFile('transcript')"
-                :max-size="5"
-                file-type="Transcript"
+                :file="uploadedFiles.founderProfiles"
+                :is-uploading="uploadStates.founderProfiles"
+                accept=".pdf,.doc,.docx"
+                placeholder="Founder CVs & team backgrounds"
+                @file-selected="
+                  (file) => handleFileUpload('founderProfiles', file)
+                "
+                @change-file="() => changeFile('founderProfiles')"
+                :max-size="8"
+                file-type="Founder Profiles"
                 compact
               />
               <div
-                v-if="validationErrors.transcript"
+                v-if="validationErrors.founderProfiles"
                 class="field-error compact"
               >
                 <i class="ri-error-warning-line"></i>
-                {{ validationErrors.transcript }}
+                {{ validationErrors.founderProfiles }}
               </div>
             </div>
 
-            <!-- Founder Updates -->
+            <!-- Market Research & Competitive Analysis -->
             <div class="upload-item">
               <label class="upload-label">
-                <i class="ri-mail-line"></i>
-                Founder Updates
+                <i class="ri-bar-chart-box-line"></i>
+                Market Research & Competition
               </label>
               <FileUploadZone
-                :file="uploadedFiles.founderUpdates"
-                :is-uploading="uploadStates.founderUpdates"
-                accept=".txt,.pdf,.doc,.docx"
-                placeholder="Email/Update file"
+                :file="uploadedFiles.marketResearch"
+                :is-uploading="uploadStates.marketResearch"
+                accept=".pdf,.doc,.docx,.xlsx"
+                placeholder="Market analysis & competitive landscape"
                 @file-selected="
-                  (file) => handleFileUpload('founderUpdates', file)
+                  (file) => handleFileUpload('marketResearch', file)
                 "
-                @change-file="() => changeFile('founderUpdates')"
-                :max-size="5"
-                file-type="Founder Updates"
+                @change-file="() => changeFile('marketResearch')"
+                :max-size="10"
+                file-type="Market Research"
                 compact
               />
               <div
-                v-if="validationErrors.founderUpdates"
+                v-if="validationErrors.marketResearch"
                 class="field-error compact"
               >
                 <i class="ri-error-warning-line"></i>
-                {{ validationErrors.founderUpdates }}
+                {{ validationErrors.marketResearch }}
+              </div>
+            </div>
+
+            <!-- Traction & Metrics Data -->
+            <div class="upload-item">
+              <label class="upload-label">
+                <i class="ri-trending-up-line"></i>
+                Traction & Metrics Data
+              </label>
+              <FileUploadZone
+                :file="uploadedFiles.tractionData"
+                :is-uploading="uploadStates.tractionData"
+                accept=".pdf,.xlsx,.csv,.png,.jpg"
+                placeholder="Growth metrics, user data, revenue"
+                @file-selected="
+                  (file) => handleFileUpload('tractionData', file)
+                "
+                @change-file="() => changeFile('tractionData')"
+                :max-size="5"
+                file-type="Traction Data"
+                compact
+              />
+              <div
+                v-if="validationErrors.tractionData"
+                class="field-error compact"
+              >
+                <i class="ri-error-warning-line"></i>
+                {{ validationErrors.tractionData }}
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Manual Transcript Input - Only show if no transcript file uploaded -->
-        <div
-          v-if="!uploadedFiles.transcript"
-          class="form-group transcript-input"
-        >
+        <!-- Manual Notes Input - Only show if no supporting docs uploaded -->
+        <div v-if="!hasAnySupportingDocs" class="form-group transcript-input">
           <label for="transcript">
             <i class="ri-chat-3-line"></i>
-            Alternative: Manual Transcript Input
+            Additional Investment Notes
             <span class="optional">(Optional)</span>
           </label>
           <p class="input-description">
-            If you don't have a transcript file, paste your call notes or pitch
-            transcript here
+            Add any additional notes about the startup, founder conversations,
+            or market insights
           </p>
           <div class="glassmorphism glow-effect">
             <textarea
               id="transcript"
               v-model="transcriptText"
-              placeholder="Paste your pitch transcript, investor call notes, or key discussion points here..."
+              placeholder="Add notes about founder conversations, market insights, competitive advantages, or any other relevant investment considerations..."
               rows="5"
             ></textarea>
             <div class="char-counter">
@@ -182,20 +217,22 @@
           </div>
         </div>
 
-        <!-- Show message when transcript file is uploaded -->
-        <div v-if="uploadedFiles.transcript" class="transcript-file-notice">
+        <!-- Show message when supporting docs are uploaded -->
+        <div v-if="hasAnySupportingDocs" class="transcript-file-notice">
           <div class="notice-content">
             <i class="ri-check-double-line"></i>
             <span
-              >Great! We'll analyze your uploaded transcript file instead of
-              manual input.</span
+              >Excellent! We'll analyze your uploaded documents for
+              comprehensive startup evaluation.</span
             >
           </div>
         </div>
 
         <!-- Document Summary -->
         <div v-if="hasAnyFiles" class="document-summary">
-          <h4><i class="ri-file-list-line"></i> Ready for Analysis</h4>
+          <h4>
+            <i class="ri-file-list-line"></i> Ready for Investment Analysis
+          </h4>
           <div class="summary-grid">
             <template v-for="(file, key) in uploadedFiles" :key="key">
               <div v-if="file" class="summary-item">
@@ -225,15 +262,11 @@
             <i class="ri-brain-line"></i>
             <div class="btn-text">
               <span v-if="!isFormReady" class="main-text"
-                >Select Documents to Begin Analysis</span
+                >Upload Startup Documents to Begin</span
               >
-              <span v-else class="main-text"
-                >Analyze {{ uploadedFileCount }} Document{{
-                  uploadedFileCount > 1 ? "s" : ""
-                }}</span
-              >
+              <span v-else class="main-text">Generate Investment Analysis</span>
               <span v-if="isFormReady" class="sub-text"
-                >AI-powered comprehensive analysis</span
+                >AI-powered startup evaluation & due diligence</span
               >
             </div>
           </div>
@@ -256,30 +289,33 @@ const analysisStore = useAnalysisStore();
 const selectedCategory = ref("");
 const transcriptText = ref("");
 
-// File upload state - ✅ Removed teamCVs
+// ✅ NEW PROFESSIONAL FILE STRUCTURE
 const uploadedFiles = ref({
   pitchDeck: null as File | null,
   financialModel: null as File | null,
-  transcript: null as File | null,
-  founderUpdates: null as File | null,
+  founderProfiles: null as File | null,
+  marketResearch: null as File | null,
+  tractionData: null as File | null,
 });
 
 const uploadStates = ref({
   pitchDeck: false,
   financialModel: false,
-  transcript: false,
-  founderUpdates: false,
+  founderProfiles: false,
+  marketResearch: false,
+  tractionData: false,
 });
 
-// ✅ Individual validation errors for each field
+// ✅ VALIDATION ERRORS FOR NEW STRUCTURE
 const validationErrors = ref({
   pitchDeck: "",
   financialModel: "",
-  transcript: "",
-  founderUpdates: "",
+  founderProfiles: "",
+  marketResearch: "",
+  tractionData: "",
 });
 
-// Validation rules - ✅ Removed teamCVs
+// ✅ VALIDATION RULES FOR INVESTMENT DOCUMENTS
 const fileValidation = {
   pitchDeck: {
     types: [
@@ -295,28 +331,42 @@ const fileValidation = {
       "application/vnd.ms-excel",
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       "text/csv",
+      "application/pdf",
     ],
     maxSize: 10 * 1024 * 1024,
-    extensions: [".xlsx", ".xls", ".csv"],
+    extensions: [".xlsx", ".xls", ".csv", ".pdf"],
   },
-  transcript: {
+  founderProfiles: {
     types: [
-      "text/plain",
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    ],
-    maxSize: 5 * 1024 * 1024,
-    extensions: [".txt", ".doc", ".docx"],
-  },
-  founderUpdates: {
-    types: [
-      "text/plain",
       "application/pdf",
       "application/msword",
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ],
+    maxSize: 8 * 1024 * 1024,
+    extensions: [".pdf", ".doc", ".docx"],
+  },
+  marketResearch: {
+    types: [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ],
+    maxSize: 10 * 1024 * 1024,
+    extensions: [".pdf", ".doc", ".docx", ".xlsx", ".xls"],
+  },
+  tractionData: {
+    types: [
+      "application/pdf",
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "text/csv",
+      "image/png",
+      "image/jpeg",
+    ],
     maxSize: 5 * 1024 * 1024,
-    extensions: [".txt", ".pdf", ".doc", ".docx"],
+    extensions: [".pdf", ".xlsx", ".csv", ".png", ".jpg", ".jpeg"],
   },
 };
 
@@ -333,12 +383,17 @@ const hasAnyFiles = computed(() => {
   return Object.values(uploadedFiles.value).some((file) => file !== null);
 });
 
+const hasAnySupportingDocs = computed(() => {
+  const { pitchDeck, ...supportingDocs } = uploadedFiles.value;
+  return Object.values(supportingDocs).some((file) => file !== null);
+});
+
 const uploadedFileCount = computed(() => {
   return Object.values(uploadedFiles.value).filter((file) => file !== null)
     .length;
 });
 
-// ✅ Enhanced file validation with individual error tracking
+// Enhanced file validation with individual error tracking
 function validateFile(
   file: File,
   documentType: keyof typeof fileValidation
@@ -415,13 +470,14 @@ async function handleAnalysis() {
   router.push("/analysis-in-progress");
 }
 
-// Helper functions - ✅ Removed teamCVs references
+// ✅ HELPER FUNCTIONS - UPDATED FOR NEW STRUCTURE
 function getDocumentType(key: string): string {
   const types = {
     pitchDeck: "Pitch Deck",
-    financialModel: "Financial Model",
-    transcript: "Call Transcript",
-    founderUpdates: "Founder Updates",
+    financialModel: "Financial Projections",
+    founderProfiles: "Founder & Team Profiles",
+    marketResearch: "Market Research & Analysis",
+    tractionData: "Traction & Growth Metrics",
   };
   return types[key as keyof typeof types] || key;
 }
@@ -430,8 +486,9 @@ function getFileIcon(key: string): string {
   const icons = {
     pitchDeck: "ri-presentation-fill",
     financialModel: "ri-line-chart-fill",
-    transcript: "ri-mic-fill",
-    founderUpdates: "ri-mail-fill",
+    founderProfiles: "ri-team-fill",
+    marketResearch: "ri-bar-chart-box-fill",
+    tractionData: "ri-trending-up-fill",
   };
   return icons[key as keyof typeof icons] || "ri-file-fill";
 }
@@ -448,24 +505,24 @@ function formatFileSize(bytes: number): string {
 <style lang="scss" scoped>
 $color-accent: #00d4ff;
 
-// ✅ Enhanced typography with bigger fonts
+// Enhanced typography with bigger fonts
 .subtitle {
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 20px; // Increased
+  font-size: 20px;
   margin-bottom: 50px;
   line-height: 1.4;
 }
 
-// ✅ Enhanced dropdown styling
+// Enhanced dropdown styling
 .dropdown-wrapper {
   position: relative;
 
   .enhanced-select {
     width: 100%;
-    font-size: 18px; // Bigger font
+    font-size: 18px;
     font-weight: 500;
-    padding: 20px 50px 20px 20px; // More padding
+    padding: 20px 50px 20px 20px;
 
     option {
       background-color: #1a1a1a;
@@ -495,7 +552,7 @@ $color-accent: #00d4ff;
   }
 }
 
-// ✅ Field-specific error styling
+// Field-specific error styling
 .field-error {
   display: flex;
   align-items: center;
@@ -521,7 +578,7 @@ $color-accent: #00d4ff;
   }
 }
 
-// ✅ Transcript input section
+// Transcript input section
 .transcript-input {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 16px;
@@ -547,7 +604,7 @@ $color-accent: #00d4ff;
   border-radius: 6px;
 }
 
-// ✅ Transcript file notice
+// Transcript file notice
 .transcript-file-notice {
   background: rgba(34, 197, 94, 0.1);
   border: 1px solid rgba(34, 197, 94, 0.3);
@@ -569,7 +626,7 @@ $color-accent: #00d4ff;
   }
 }
 
-// ✅ Enhanced button styling
+// Enhanced button styling
 .analyze-btn {
   width: 100%;
   padding: 24px;
@@ -591,7 +648,7 @@ $color-accent: #00d4ff;
       align-items: flex-start;
 
       .main-text {
-        font-size: 20px; // Bigger font
+        font-size: 20px;
         font-weight: 600;
         letter-spacing: 0.5px;
       }
@@ -607,30 +664,30 @@ $color-accent: #00d4ff;
 
 // Enhanced section titles
 .section-title {
-  font-size: 24px; // Bigger font
+  font-size: 24px;
 
   .optional {
-    font-size: 16px; // Bigger font
+    font-size: 16px;
   }
 }
 
 .section-subtitle {
-  font-size: 17px; // Bigger font
+  font-size: 17px;
 }
 
 .upload-section-title {
-  font-size: 20px; // Bigger font
+  font-size: 20px;
 }
 
 .upload-label {
-  font-size: 16px; // Bigger font
+  font-size: 16px;
 }
 
 label {
-  font-size: 20px; // Bigger font
+  font-size: 20px;
 }
 
-// Rest of your existing styles...
+// Base styles
 .mandatory {
   color: #ff4d4d;
   font-weight: bold;
@@ -722,7 +779,7 @@ label {
     gap: 8px;
     color: #ffffff;
     margin-bottom: 15px;
-    font-size: 18px; // Bigger font
+    font-size: 18px;
 
     i {
       color: $color-accent;
@@ -760,12 +817,12 @@ label {
   .doc-type {
     color: #ffffff;
     font-weight: 500;
-    font-size: 15px; // Bigger font
+    font-size: 15px;
   }
 
   .file-name {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 13px; // Bigger font
+    font-size: 13px;
     word-break: break-all;
   }
 
@@ -799,6 +856,7 @@ label {
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "AlibabaSans";
   src: url("https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Medium.otf")
@@ -806,6 +864,7 @@ label {
   font-weight: 500;
   font-style: normal;
 }
+
 @font-face {
   font-family: "AlibabaSans";
   src: url("https://assets-persist.lovart.ai/agent-static-assets/Alibaba-PuHuiTi-Bold.otf")
@@ -851,7 +910,7 @@ label {
 }
 
 h1 {
-  font-size: 48px; // Bigger font
+  font-size: 48px;
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
