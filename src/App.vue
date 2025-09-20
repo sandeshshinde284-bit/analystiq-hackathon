@@ -1,30 +1,24 @@
+<!-- File: src/App.vue -->
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <!-- 
+    With our new layout system, this root App.vue component's only job 
+    is to provide a space for the router to render the correct layout. 
+    We remove the direct navbar component from here.
+  -->
   <router-view />
 </template>
 
+<script lang="ts">
+import { defineComponent } from "vue";
+
+// We no longer need to import or register AppNavbar here.
+export default defineComponent({
+  name: "App",
+});
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+// It's great that your global styles are in a separate file.
+// We can leave this section as is, or import them here if needed.
+@import "@/styles/global.scss";
 </style>
