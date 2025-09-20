@@ -53,7 +53,7 @@
               placeholder="Drag and drop startup pitch deck here"
               @file-selected="(file) => handleFileUpload('pitchDeck', file)"
               @change-file="() => changeFile('pitchDeck')"
-              :max-size="15"
+              :max-size="30"
               file-type="Pitch Deck"
             />
             <!-- Inline validation error -->
@@ -323,7 +323,7 @@ const fileValidation = {
       "application/vnd.ms-powerpoint",
       "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     ],
-    maxSize: 15 * 1024 * 1024,
+    maxSize: 30 * 1024 * 1024,
     extensions: [".pdf", ".ppt", ".pptx"],
   },
   financialModel: {
@@ -488,7 +488,7 @@ function getFileIcon(key: string): string {
     financialModel: "ri-line-chart-fill",
     founderProfiles: "ri-team-fill",
     marketResearch: "ri-bar-chart-box-fill",
-    tractionData: "ri-trending-up-fill",
+    tractionData: "ri-rocket-fill",
   };
   return icons[key as keyof typeof icons] || "ri-file-fill";
 }
